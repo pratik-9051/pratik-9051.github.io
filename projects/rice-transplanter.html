@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Manual Rice Transplanter — Pratik Ghimire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --green-dark: #1a3a2a;
+    --green-mid: #2d5a3d;
+    --green-accent: #4a8c5c;
+    --green-light: #7ab893;
+    --green-pale: #e8f2eb;
+    --green-mist: #f2f8f4;
+    --gold: #c8a84b;
+    --gold-light: #f0d98a;
+    --text-dark: #0f1f17;
+    --text-mid: #2c4a38;
+    --text-muted: #5a7a68;
+    --white: #ffffff;
+    --border: rgba(74,140,92,0.2);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--green-mist); color: var(--text-dark); line-height: 1.7; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(26,58,42,0.97); backdrop-filter: blur(12px);
+    padding: 0 2rem; display: flex; align-items: center; justify-content: space-between;
+    height: 60px; border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; color: var(--gold-light); font-size: 1.1rem; text-decoration: none; }
+  .nav-back { display: inline-flex; align-items: center; gap: 0.5rem; color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .nav-back:hover { color: var(--gold-light); }
+
+  /* HERO */
+  .project-hero {
+    min-height: 58vh;
+    background: linear-gradient(150deg, #0e2518 0%, #1a3a2a 40%, #2a5538 100%);
+    display: flex; align-items: flex-end;
+    padding: 80px 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-pattern {
+    position: absolute; inset: 0; opacity: 0.05;
+    background-image:
+      linear-gradient(45deg, var(--green-light) 25%, transparent 25%),
+      linear-gradient(-45deg, var(--green-light) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, var(--green-light) 75%),
+      linear-gradient(-45deg, transparent 75%, var(--green-light) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  }
+  .project-hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 80% 30%, rgba(200,168,75,0.12) 0%, transparent 50%);
+  }
+  .hero-content { max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+  .project-type-tag {
+    display: inline-block;
+    background: rgba(200,168,75,0.15); border: 1px solid rgba(200,168,75,0.4);
+    color: var(--gold-light); font-size: 0.72rem; font-family: 'DM Mono', monospace;
+    letter-spacing: 0.12em; padding: 0.3rem 0.8rem; border-radius: 2px; margin-bottom: 1.2rem; text-transform: uppercase;
+  }
+  .project-hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); color: var(--white); line-height: 1.15; margin-bottom: 0.8rem; }
+  .project-hero h1 span { color: var(--gold-light); }
+  .hero-sub { color: rgba(255,255,255,0.6); font-size: 1rem; max-width: 560px; }
+
+  /* AWARD ROW */
+  .awards-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+  .award-pill {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    background: rgba(200,168,75,0.12); border: 1px solid rgba(200,168,75,0.35);
+    color: var(--gold-light); padding: 0.5rem 1rem;
+    border-radius: 3px; font-size: 0.82rem;
+  }
+
+  /* CONTENT */
+  .content-wrap { max-width: 900px; margin: 0 auto; padding: 4rem 2rem; }
+  .block { margin-bottom: 3rem; }
+  .block-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green-accent); margin-bottom: 0.4rem; }
+  .block-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--green-dark); margin-bottom: 1.2rem; }
+  .block p { color: var(--text-mid); margin-bottom: 0.9rem; font-size: 0.97rem; }
+  .block p strong { color: var(--green-dark); }
+
+  /* PHOTO SECTION */
+  .media-section { margin-bottom: 3rem; }
+  .media-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--green-dark); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+
+  /* PHOTO GRID */
+  .photo-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1rem; }
+  .photo-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 1rem; }
+  .photo-slot {
+    border-radius: 4px; overflow: hidden; background: var(--green-pale);
+    border: 2px dashed var(--border); min-height: 180px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--text-muted); text-align: center; padding: 1.2rem; gap: 0.5rem;
+    cursor: default; transition: border-color 0.2s;
+  }
+  .photo-slot:hover { border-color: var(--green-accent); }
+  .photo-slot img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .photo-slot.has-image { position: relative; padding: 0; min-height: 220px; }
+  .photo-slot .ph-icon { font-size: 2.5rem; opacity: 0.3; }
+  .photo-slot .ph-label { font-weight: 500; font-size: 0.85rem; color: var(--text-mid); }
+  .photo-slot .ph-note { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.06em; color: var(--text-muted); }
+
+  /* VIDEO SLOT */
+  .video-slot {
+    background: #0a1a10;
+    border: 2px dashed rgba(200,168,75,0.3);
+    border-radius: 4px; min-height: 260px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.5); text-align: center; padding: 2rem; gap: 0.8rem;
+    position: relative; overflow: hidden;
+  }
+  .video-slot::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(circle at center, rgba(74,140,92,0.05) 0%, transparent 70%);
+  }
+  .video-slot video { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+  .video-icon { font-size: 3rem; opacity: 0.4; position: relative; z-index: 1; }
+  .video-label { font-weight: 500; font-size: 0.9rem; color: rgba(255,255,255,0.6); position: relative; z-index: 1; }
+  .video-note { font-family: 'DM Mono', monospace; font-size: 0.7rem; color: var(--gold); letter-spacing: 0.06em; position: relative; z-index: 1; }
+  .add-media-tip {
+    background: rgba(200,168,75,0.08); border: 1px solid rgba(200,168,75,0.2);
+    border-radius: 3px; padding: 0.8rem 1.2rem;
+    font-family: 'DM Mono', monospace; font-size: 0.72rem; color: rgba(255,255,255,0.5);
+    letter-spacing: 0.04em; position: relative; z-index: 1;
+  }
+
+  /* SPECS TABLE */
+  .specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0; }
+  .spec-card {
+    background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 1.2rem 1.5rem;
+    border-left: 3px solid var(--green-accent);
+  }
+  .spec-label { font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--green-accent); margin-bottom: 0.3rem; }
+  .spec-value { font-size: 1rem; font-weight: 500; color: var(--green-dark); }
+  .spec-detail { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem; }
+
+  /* AWARDS DETAIL */
+  .award-detail-card {
+    background: var(--green-dark); border: 1px solid var(--gold); border-radius: 4px;
+    padding: 1.5rem 2rem; margin-bottom: 1rem;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+  }
+  .adc-icon { font-size: 2.5rem; flex-shrink: 0; }
+  .adc-text h4 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.05rem; margin-bottom: 0.4rem; }
+  .adc-text p { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+  .adc-text p span { color: var(--gold-light); }
+  .adc-text .year { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--gold); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.4rem; }
+
+  /* CHALLENGE */
+  .challenge-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+  .challenge-block { background: var(--white); border: 1px solid var(--border); border-radius: 4px; padding: 1.5rem; }
+  .challenge-block h4 { font-family: 'DM Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .challenge-block.prob h4 { color: #c0392b; }
+  .challenge-block.sol h4 { color: var(--green-accent); }
+  .challenge-block p { font-size: 0.88rem; color: var(--text-mid); }
+
+  /* BOTTOM NAV */
+  .bottom-nav { background: var(--green-dark); padding: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .bottom-nav a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.85rem; transition: color 0.2s; }
+  .bottom-nav a:hover { color: var(--gold-light); }
+  .bottom-nav .home-link { color: var(--gold-light); font-family: 'Playfair Display', serif; }
+
+  footer { background: #0a1a10; text-align: center; padding: 1.2rem; font-size: 0.75rem; color: rgba(255,255,255,0.2); font-family: 'DM Mono', monospace; }
+
+  @media (max-width: 640px) {
+    .photo-grid-3 { grid-template-columns: 1fr 1fr; }
+    .specs-grid { grid-template-columns: 1fr; }
+    .challenge-row { grid-template-columns: 1fr; }
+    .awards-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html">Pratik Ghimire</a>
+  <a class="nav-back" href="../index.html">← Back to Portfolio</a>
+</nav>
+
+<!-- HERO -->
+<div class="project-hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="project-type-tag">Agricultural Engineering · Fabrication</div>
+    <h1>Manual Rice<br/><span>Transplanter</span></h1>
+    <p class="hero-sub">Designed, fabricated, and field-tested from scratch — a manually operated rice transplanting device that won at both national and international competitions.</p>
+    <div class="awards-row">
+      <div class="award-pill">🥇 Delta 4.0 — 1st Place</div>
+      <div class="award-pill">🥇 HULT Prize Eastern Region</div>
+      <div class="award-pill">🌍 Selected — Mumbai International Round</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content-wrap">
+
+  <!-- OVERVIEW -->
+  <div class="block">
+    <div class="block-label">Overview</div>
+    <div class="block-title">The Project</div>
+    <p>Rice transplanting in Nepal is one of the most <strong>labor-intensive and physically demanding</strong> agricultural tasks — requiring farmers to spend hours bent over in flooded paddies, manually placing seedlings row by row. Transplanting season is a major bottleneck for small-scale hill farmers.</p>
+    <p>This project designed and built a <strong>manually operated transplanting device</strong> that reduces physical strain, increases planting uniformity, and speeds up the transplanting process — using locally available materials and fabrication techniques accessible to rural workshops.</p>
+    <p>The device was <strong>designed, fabricated, and field-tested entirely by the team</strong>, from initial sketches to working prototype, validated in real paddy field conditions in Nepal.</p>
+  </div>
+
+  <!-- PHOTOS -->
+  <div class="media-section">
+    <div class="block-label">Gallery</div>
+    <div class="media-title">📸 Project Photos</div>
+
+    <div class="photo-grid-3">
+      <div class="photo-slot">
+        <!-- TO ADD PHOTO: replace this div's contents with: <img src="../photos/transplanter-1.jpg" alt="..."/> and add class="has-image" to the div -->
+        <span class="ph-icon">🌾</span>
+        <span class="ph-label">Device Overview</span>
+        <span class="ph-note">[ Upload photo & link here ]</span>
+      </div>
+      <div class="photo-slot">
+        <span class="ph-icon">🔧</span>
+        <span class="ph-label">Fabrication / Build</span>
+        <span class="ph-note">[ Upload photo & link here ]</span>
+      </div>
+      <div class="photo-slot">
+        <span class="ph-icon">🏆</span>
+        <span class="ph-label">Award Ceremony</span>
+        <span class="ph-note">[ Upload photo & link here ]</span>
+      </div>
+    </div>
+
+    <div class="photo-grid-2">
+      <div class="photo-slot">
+        <span class="ph-icon">🌊</span>
+        <span class="ph-label">Field Testing — Paddy</span>
+        <span class="ph-note">[ Upload photo & link here ]</span>
+      </div>
+      <div class="photo-slot">
+        <span class="ph-icon">📐</span>
+        <span class="ph-label">CAD Drawing / Schematic</span>
+        <span class="ph-note">[ Upload AutoCAD drawing or screenshot ]</span>
+      </div>
+    </div>
+
+    <p style="font-size:0.8rem;color:var(--text-muted);font-family:'DM Mono',monospace;letter-spacing:0.04em;">
+      → To add photos: upload .jpg/.png files to your GitHub repo under <code style="background:var(--green-pale);padding:0.1rem 0.4rem;border-radius:2px;">photos/</code> folder, then replace the placeholder divs above with <code style="background:var(--green-pale);padding:0.1rem 0.4rem;border-radius:2px;">&lt;img src="../photos/filename.jpg"/&gt;</code>
+    </p>
+  </div>
+
+  <!-- VIDEO -->
+  <div class="media-section">
+    <div class="block-label">Demo</div>
+    <div class="media-title">🎥 Field Demo Video</div>
+
+    <div class="video-slot">
+      <!-- TO ADD VIDEO: replace video-slot contents with <video controls><source src="../videos/transplanter-demo.mp4" type="video/mp4"/></video> -->
+      <!-- OR embed a YouTube iframe: <iframe width="100%" height="100%" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" ...></iframe> -->
+      <span class="video-icon">▶</span>
+      <span class="video-label">Field demonstration video coming soon</span>
+      <span class="video-note">Transplanting in action — paddy field, Nepal</span>
+      <div class="add-media-tip">
+        To add: upload .mp4 to repo → replace this block with &lt;video controls&gt; tag<br/>
+        Or paste a YouTube embed link
+      </div>
+    </div>
+  </div>
+
+  <!-- SPECS -->
+  <div class="block">
+    <div class="block-label">Technical Details</div>
+    <div class="block-title">Design Specifications</div>
+    <div class="specs-grid">
+      <div class="spec-card">
+        <div class="spec-label">Operation Type</div>
+        <div class="spec-value">Manual Push</div>
+        <div class="spec-detail">No engine or fuel required — operable by a single person</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Target Crop</div>
+        <div class="spec-value">Paddy Rice (Oryza sativa)</div>
+        <div class="spec-detail">Compatible with standard mat-type seedlings raised in trays</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Row Spacing</div>
+        <div class="spec-value">Uniform — adjustable</div>
+        <div class="spec-detail">Consistent spacing improves yield and mechanized harvesting compatibility</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Fabrication</div>
+        <div class="spec-value">Locally Sourced Materials</div>
+        <div class="spec-detail">Built using materials available in rural Nepali workshops</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Design Tool</div>
+        <div class="spec-value">AutoCAD</div>
+        <div class="spec-detail">Full mechanical drawing produced before fabrication</div>
+      </div>
+      <div class="spec-card">
+        <div class="spec-label">Field Testing</div>
+        <div class="spec-value">Paddy Fields, Nepal</div>
+        <div class="spec-detail">Tested in flooded paddy conditions; validated transplanting performance</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROBLEM / SOLUTION -->
+  <div class="block">
+    <div class="block-label">Context</div>
+    <div class="block-title">Problem & Solution</div>
+    <div class="challenge-row">
+      <div class="challenge-block prob">
+        <h4>⚠ The Problem</h4>
+        <p>Manual transplanting requires farmers to work bent at the waist for 6–10 hours per day, leading to chronic back injuries. Planting rows are inconsistent, which reduces yield and makes mechanical harvesting difficult. Rural labor is scarce during peak seasons.</p>
+      </div>
+      <div class="challenge-block sol">
+        <h4>✓ The Solution</h4>
+        <p>The transplanter allows the farmer to work in an upright position while the mechanism places seedlings at uniform depth and spacing. No fuel or electricity required — suited for terraced hill farms with no motor access. Fabricable in local workshops.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- AWARDS -->
+  <div class="block">
+    <div class="block-label">Recognition</div>
+    <div class="block-title">Awards & Competition History</div>
+
+    <div class="award-detail-card">
+      <div class="adc-icon">🥇</div>
+      <div class="adc-text">
+        <div class="year">2024</div>
+        <h4>Delta 4.0 — National Technical Festival</h4>
+        <p>Awarded <span>1st Place</span> at the Delta 4.0 competition, a national-level technical event recognizing engineering innovation. The transplanter was evaluated on design, fabrication quality, technical feasibility, and social impact potential for Nepal's smallholder farming sector.</p>
+      </div>
+    </div>
+
+    <div class="award-detail-card">
+      <div class="adc-icon">🥇</div>
+      <div class="adc-text">
+        <div class="year">2024</div>
+        <h4>HULT Prize — Eastern Region (1st Place)</h4>
+        <p>Won the <span>HULT Prize Eastern Region</span> round with the rice transplanter concept. Competed against interdisciplinary teams in a business pitch format, presenting the device's social enterprise potential for rural Nepal — reducing physical burden on farmers while improving productivity.</p>
+      </div>
+    </div>
+
+    <div class="award-detail-card">
+      <div class="adc-icon">🌍</div>
+      <div class="adc-text">
+        <div class="year">2024</div>
+        <h4>HULT Prize — Mumbai International Round</h4>
+        <p>Selected from the Eastern Region win to represent Nepal at the <span>HULT Prize International Round in Mumbai</span> — competing against teams from across South and Southeast Asia in the social entrepreneurship track.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="bottom-nav">
+  <a href="../index.html" class="home-link">← Pratik Ghimire</a>
+  <div style="display:flex;gap:1.5rem;">
+    <a href="crop-yield.html">Crop Yield Prediction →</a>
+    <a href="computer-vision.html">Computer Vision Projects →</a>
+  </div>
+</div>
+
+<footer>© 2026 Pratik Ghimire · Kathmandu, Nepal</footer>
+
+</body>
+</html>
