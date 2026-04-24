@@ -104,7 +104,7 @@ I'm actively looking for **graduate research assistantships** in:
 - 🛰️ Remote Sensing + Machine Learning
 - 🌍 Climate-Smart Agriculture
 
-Feel free to reach out via [LinkedIn](https://linkedin.com) or email me at **your@email.com**
+Feel free to reach out via [LinkedIn](https://linkedin.com) or email me at **pratikghimire309@.com**
 
 ---
 
