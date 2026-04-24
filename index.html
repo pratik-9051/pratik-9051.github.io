@@ -496,101 +496,89 @@
   <div class="container">
     <div class="section-label">Work</div>
     <div class="section-title">Featured Projects</div>
-    <div class="projects-grid">
+   
 
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-icon">🌽</div>
-          <h3>Crop Yield Prediction — Nepal</h3>
-          <div class="project-award">📄 Presented at ICRTAI 2025</div>
-        </div>
-        <div class="project-body">
-          <p>Full ML pipeline predicting district-level crop yields across Nepal using NASA POWER meteorological data and MoALD agricultural statistics. XGBoost outperformed all other models. Deployed as a live Streamlit web app.</p>
-          <div class="project-tags">
-            <span class="tag">XGBoost</span>
-            <span class="tag">Python</span>
-            <span class="tag">Streamlit</span>
-            <span class="tag">NASA POWER</span>
-            <span class="tag">Scikit-learn</span>
-          </div>
-          <a href="https://github.com/pratik-9051" class="project-link">View on GitHub →</a>
-        </div>
+<div class="projects-grid">
+
+  <!-- Card 1: Crop Yield — links to projects/crop-yield.html -->
+  <div class="project-card" onclick="location.href='projects/crop-yield.html'" style="cursor:pointer;">
+    <div class="project-header">
+      <div class="project-icon">🌽</div>
+      <h3>Crop Yield Prediction — Nepal</h3>
+      <div class="project-award">📄 Presented at ICRTAI 2025</div>
+    </div>
+    <div class="project-body">
+      <p>Full ML pipeline predicting district-level crop yields across Nepal using NASA POWER meteorological data and MoALD agricultural statistics. XGBoost outperformed all other models. Deployed as a live Streamlit web app.</p>
+      <div class="project-tags">
+        <span class="tag">XGBoost</span>
+        <span class="tag">Python</span>
+        <span class="tag">Streamlit</span>
+        <span class="tag">NASA POWER</span>
+        <span class="tag">Scikit-learn</span>
       </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-icon">☕</div>
-          <h3>Coffee Leaf Nutrient Detection</h3>
-          <div class="project-award">🏆 UIUC AI Foundry Hackathon 2025</div>
-        </div>
-        <div class="project-body">
-          <p>YOLOv5-based object detection model identifying nitrogen, phosphorus, and potassium deficiencies in coffee leaves from field images. Dataset annotated using Roboflow and trained on Google Colab.</p>
-          <div class="project-tags">
-            <span class="tag">YOLOv5</span>
-            <span class="tag">Roboflow</span>
-            <span class="tag">OpenCV</span>
-            <span class="tag">Google Colab</span>
-          </div>
-          <a href="https://github.com/pratik-9051" class="project-link">View on GitHub →</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-icon">🐄</div>
-          <h3>Livestock Monitoring System</h3>
-          <div class="project-award">🔬 Ongoing Research</div>
-        </div>
-        <div class="project-body">
-          <p>YOLO-based computer vision system for cattle detection, tracking, and behavior analysis. Detects cow faces and body keypoints using pose estimation. Feeder classification module in development.</p>
-          <div class="project-tags">
-            <span class="tag">YOLOv5</span>
-            <span class="tag">Pose Estimation</span>
-            <span class="tag">OpenCV</span>
-            <span class="tag">Python</span>
-          </div>
-          <a href="https://github.com/pratik-9051" class="project-link">View on GitHub →</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-icon">🥔</div>
-          <h3>Potato Leaf Disease Classification</h3>
-          <div class="project-award">🧠 Deep Learning</div>
-        </div>
-        <div class="project-body">
-          <p>CNN-based multi-class disease classification for potato crops using TensorFlow. Classifies Early Blight, Late Blight, and Healthy leaves from the Kaggle Plant Disease dataset.</p>
-          <div class="project-tags">
-            <span class="tag">CNN</span>
-            <span class="tag">TensorFlow</span>
-            <span class="tag">Keras</span>
-            <span class="tag">Python</span>
-          </div>
-          <a href="https://github.com/pratik-9051" class="project-link">View on GitHub →</a>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <div class="project-header">
-          <div class="project-icon">🌾</div>
-          <h3>Manual Rice Transplanter</h3>
-          <div class="project-award">🥇 1st — Delta 4.0 · HULT Prize Eastern Region</div>
-        </div>
-        <div class="project-body">
-          <p>Designed, fabricated, and field-tested a manual rice transplanter from scratch. Won 1st prize at the Delta 4.0 National Technical Festival and HULT Prize Eastern Region, then selected for the international round in Mumbai.</p>
-          <div class="project-tags">
-            <span class="tag">Agricultural Engineering</span>
-            <span class="tag">AutoCAD</span>
-            <span class="tag">Fabrication</span>
-            <span class="tag">Field Testing</span>
-          </div>
-        </div>
-      </div>
-
+      <a href="projects/crop-yield.html" class="project-link">View Full Project →</a>
     </div>
   </div>
-</section>
+
+  <!-- Card 2: Computer Vision (merged) — links to projects/computer-vision.html -->
+  <div class="project-card" onclick="location.href='projects/computer-vision.html'" style="cursor:pointer;">
+    <div class="project-header">
+      <div class="project-icon">👁️</div>
+      <h3>Deep Learning & Computer Vision</h3>
+      <div class="project-award">🏆 UIUC AI Foundry · Coffee Leaf + Livestock</div>
+    </div>
+    <div class="project-body">
+      <p>Two YOLO-based vision systems: nutrient deficiency detection (N/P/K) in coffee leaves from field images, and an ongoing livestock monitoring system with cow detection, face ID, and pose estimation.</p>
+      <div class="project-tags">
+        <span class="tag">YOLOv5</span>
+        <span class="tag">Roboflow</span>
+        <span class="tag">OpenCV</span>
+        <span class="tag">PyTorch</span>
+      </div>
+      <a href="projects/computer-vision.html" class="project-link">View Full Project →</a>
+    </div>
+  </div>
+
+  <!-- Card 3: Potato Disease -->
+  <div class="project-card">
+    <div class="project-header">
+      <div class="project-icon">🥔</div>
+      <h3>Potato Leaf Disease Classification</h3>
+      <div class="project-award">🧠 Deep Learning</div>
+    </div>
+    <div class="project-body">
+      <p>CNN-based multi-class disease classification for potato crops using TensorFlow. Classifies Early Blight, Late Blight, and Healthy leaves from the Kaggle Plant Disease dataset.</p>
+      <div class="project-tags">
+        <span class="tag">CNN</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">Keras</span>
+        <span class="tag">Python</span>
+      </div>
+      <a href="https://github.com/pratik-9051" class="project-link">View on GitHub →</a>
+    </div>
+  </div>
+
+  <!-- Card 4: Rice Transplanter — links to projects/rice-transplanter.html -->
+  <div class="project-card" onclick="location.href='projects/rice-transplanter.html'" style="cursor:pointer;">
+    <div class="project-header">
+      <div class="project-icon">🌾</div>
+      <h3>Manual Rice Transplanter</h3>
+      <div class="project-award">🥇 1st — Delta 4.0 · HULT Prize Eastern Region</div>
+    </div>
+    <div class="project-body">
+      <p>Designed, fabricated, and field-tested a manual rice transplanter from scratch. Won 1st prize at the Delta 4.0 National Technical Festival and HULT Prize Eastern Region, then selected for the international round in Mumbai.</p>
+      <div class="project-tags">
+        <span class="tag">Agricultural Engineering</span>
+        <span class="tag">AutoCAD</span>
+        <span class="tag">Fabrication</span>
+        <span class="tag">Field Testing</span>
+      </div>
+      <a href="projects/rice-transplanter.html" class="project-link">View Full Project →</a>
+    </div>
+  </div>
+
+</div>
+
 
 <!-- RESEARCH -->
 <section class="research" id="research">
